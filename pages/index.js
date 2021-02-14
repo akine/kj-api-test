@@ -1,6 +1,9 @@
+import Graph from "./graph";
+
 export default function Home({ sleeps }) {
   return (
     <div>
+      <Graph />
       <p>ouraring test</p>
       {sleeps.map((sleep, index) => (
         <div key={index}>
