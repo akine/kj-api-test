@@ -1,5 +1,5 @@
 {
-  "name": "image-api-test",
+  "name": "kj-api-test",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "next": "10.0.6",
+    "oura-cloud-api": "^1.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1"
   }
