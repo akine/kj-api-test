@@ -15,13 +15,11 @@ export default function Home({ sleeps }) {
   );
 }
 
-export const getStaticProps = async () => {
+export async function getStaticProps() {
   const Client = require("oura-cloud-api");
   const accessToken = process.env.ACCESS_TOKEN;
   const client = new Client(accessToken);
   const today = new Date();
-  console.log(today);
-  console.log("today");
 
   const userInfo = await client.getUserInfo();
   console.log(`The call returned: ${JSON.stringify(userInfo)}`);
@@ -36,5 +34,7 @@ export const getStaticProps = async () => {
     props: {
       sleeps,
     },
+    // 8時間毎に更新
+    revalidate: 28800,
   };
-};
+}

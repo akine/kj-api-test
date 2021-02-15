@@ -18,7 +18,7 @@ export const RadarChart = () => {
     },
 
     title: {
-      text: "Budget vs spending",
+      text: "some sleep data appear here",
       x: -80,
     },
 
