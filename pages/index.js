@@ -34,7 +34,7 @@ export async function getStaticProps() {
     props: {
       sleeps,
     },
-    // 8時間毎に更新
-    revalidate: 28800,
+    // 1時間毎に更新
+    revalidate: 3600,
   };
 }
