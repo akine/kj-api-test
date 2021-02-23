@@ -4,7 +4,8 @@ export default function Home({ sleeps }) {
   return (
     <div>
       <Graph />
-      <p>ouraring test</p>
+      <p>小城の1週間の睡眠状態</p>
+      <p>ouraring readinessの数値</p>
       {sleeps.map((sleep, index) => (
         <div key={index}>
           <h1>{sleep.summary_date}</h1>
@@ -20,12 +21,13 @@ export async function getStaticProps() {
   const accessToken = process.env.ACCESS_TOKEN;
   const client = new Client(accessToken);
   const today = new Date();
+  const pastDate = today.getDate() - 7;
 
   const userInfo = await client.getUserInfo();
   console.log(`The call returned: ${JSON.stringify(userInfo)}`);
 
   const sleeps = await client.getReadinessSummaries({
-    start: "2019-01-15",
+    start: today.setDate(pastDate),
     end: today,
   });
   console.log(`The call returned: ${JSON.stringify(sleeps)}`);
