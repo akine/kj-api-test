@@ -1,18 +1,29 @@
 import Graph from "./graph";
 
-export default function Home({ sleeps }) {
+export default function Home({ readiness, sleeps }) {
   return (
-    <div>
-      <Graph />
-      <p>小城の1週間の睡眠状態</p>
-      <p>ouraring readinessの数値</p>
-      {sleeps.map((sleep, index) => (
-        <div key={index}>
-          <h1>{sleep.summary_date}</h1>
-          <p>{sleep.score}</p>
-        </div>
-      ))}
-    </div>
+    <>
+      <div>
+        <Graph />
+        <p>小城の1週間の睡眠状態</p>
+        <p>ouraring readinessの数値</p>
+        {readiness.map((ready, index) => (
+          <div key={index}>
+            <h1>{ready.summary_date}</h1>
+            <p>{ready.score}</p>
+          </div>
+        ))}
+      </div>
+      <div>
+        レムノンレムのデータ
+        {sleeps.map((sleep, index) => (
+          <div key={index}>
+            <p>レム: {sleep.score_rem}</p>レム: 
+            <p>ノンレム: {sleep.score_deep}</p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -24,16 +35,23 @@ export async function getStaticProps() {
   const pastDate = today.getDate() - 7;
 
   const userInfo = await client.getUserInfo();
-  console.log(`The call returned: ${JSON.stringify(userInfo)}`);
+  // console.log(`The call returned: ${JSON.stringify(userInfo)}`);
 
-  const sleeps = await client.getReadinessSummaries({
+  const readiness = await client.getReadinessSummaries({
     start: today.setDate(pastDate),
     end: today,
   });
-  console.log(`The call returned: ${JSON.stringify(sleeps)}`);
+  // console.log(`The call returned: ${JSON.stringify(readiness)}`);
+
+  const sleeps = await client.getSleepSummaries({
+    start: today.setDate(pastDate),
+    end: today,
+  });
+  // console.log(`The call returned: ${JSON.stringify(sleeps, null, 2)}`);
 
   return {
     props: {
+      readiness,
       sleeps,
     },
     // 1時間毎に更新
