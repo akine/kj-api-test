@@ -18,7 +18,7 @@ export default function Home({ readiness, sleeps }) {
         レムノンレムのデータ
         {sleeps.map((sleep, index) => (
           <div key={index}>
-            <p>レム: {sleep.score_rem}</p>レム: 
+            <p>レム: {sleep.score_rem}</p> 
             <p>ノンレム: {sleep.score_deep}</p>
           </div>
         ))}
